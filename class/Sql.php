@@ -1,6 +1,6 @@
 <?php 
 
-class Sql extends PDO {
+class Sql {
 
 
     private $conn;
@@ -11,7 +11,7 @@ class Sql extends PDO {
 
         try {
 
-            $this->conn = new PDO("mysql:dbname=dbphp7;host=localhost", "root", "");
+            $this->conn = new PDO("mysql:dbname=dbdao;host=localhost", "root", "");
 
         } catch (PDOException $e) {
 

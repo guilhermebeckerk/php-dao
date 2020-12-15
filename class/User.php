@@ -4,7 +4,7 @@ class User {
 
     private $iduser;
     private $deslogin;
-    private $dessenha;
+    private $despass;
     private $dtcadastro;
     
     public function getIduser(){
@@ -23,12 +23,12 @@ class User {
         $this->deslogin = $value;
     }
 
-    public function getDessenha(){
-        return $this->dessenha;
+    public function getDespass(){
+        return $this->despass;
     }
 
-    public function setDessenha($value){
-        $this->dessenha = $value;
+    public function setDespass($value){
+        $this->despass = $value;
     }
 
     public function getDtcadastro(){
@@ -91,7 +91,7 @@ class User {
 
         $sql = new Sql();
 
-        $results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :login AND dessenha = :password", array(
+        $results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :login AND despass = :password", array(
             ":login"=> $login,
             ":password"=> $password
         ));
@@ -102,7 +102,7 @@ class User {
 
             $this->setIduser($row["iduser"]);
             $this->setDeslogin($row["deslogin"]);
-            $this->setDessenha($row["dessenha"]);
+            $this->setDespass($row["despass"]);
             $this->setDtcadastro(new DateTime($row["dtcadastro"]));
 
         } else {
@@ -121,7 +121,7 @@ class User {
         return json_encode(array(
             "iduser"=>$this->getIduser(),
             "deslogin"=>$this->getDeslogin(),
-            "dessenha"=>$this->getDessenha(),
+            "despass"=>$this->getDespass(),
             "dtcadastro"=>$this->getDtcadastro()->format("d/m/Y H:i:s")
         ));
 
