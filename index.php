@@ -15,9 +15,19 @@ echo json_encode($usuarios);
 /*
 $user = new User();
 
-$user->loadByID(5);
+$user->loadByID(3);
 
 echo $user;
+*/
+
+//-------------------------------- Insert User on Database ---------------------
+/*
+$newUser = new User();
+
+$newUser->setDeslogin("");
+$newUser->setDespass("");
+
+$newUser->insert();
 */
 
 //-------------------------------- Load All User From Database ---------------------
@@ -35,11 +45,33 @@ echo json_encode($search);
 */
 
 //------------------------------- Load User with Login And Password ----------------------
-
+/*
 $user = new User();
 
-$user->login("Anna", "abcdefg");
+$user->login("", "");
 
 echo $user;
+*/
 
+//-------------------------------- Update User on database --------------------------------------
+/*
+$user = new User();
+
+$user->loadById(4);
+
+$user->update('', '');
+
+echo $user;
+*/
+
+//-------------------------------- Delete User on database --------------------------------------
+/*
+$user = new User();
+
+$user->loadById(5);
+
+$user->delete();
+
+echo $user;
+*/
 ?>

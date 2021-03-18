@@ -51,12 +51,7 @@ class User {
 
         if (count($results) > 0){
 
-            $row = $results[0];
-
-            $this->setIduser($row["iduser"]);
-            $this->setDeslogin($row["deslogin"]);
-            $this->setDessenha($row["dessenha"]);
-            $this->setDtcadastro(new DateTime($row["dtcadastro"]));
+            $this->setData($results[0]);
 
         }
 
@@ -98,12 +93,8 @@ class User {
 
         if (count($results) > 0){
 
-            $row = $results[0];
-
-            $this->setIduser($row["iduser"]);
-            $this->setDeslogin($row["deslogin"]);
-            $this->setDespass($row["despass"]);
-            $this->setDtcadastro(new DateTime($row["dtcadastro"]));
+            $this->setData($results[0]);
+            
 
         } else {
 
@@ -112,6 +103,64 @@ class User {
 
         }
 
+    }
+
+    //-------------------------------- Fill Seters --------------------------------------
+
+    public function setData($data){
+
+        $this->setIduser($data["iduser"]);
+        $this->setDeslogin($data["deslogin"]);
+        $this->setDespass($data["despass"]);
+        $this->setDtcadastro(new DateTime($data["dtcadastro"]));
+
+    }
+
+    //-------------------------------- Delete User on database --------------------------------------
+
+    public function delete(){
+
+        $sql = new $Sql();
+
+        $sql->query("DELETE FROM tb_users WHERE iduser = :id", array(
+            ':id' => $this->getIduser()
+        ));
+        
+        $this->setIduser(0);
+        $this->setDeslogin("");
+        $this->setDespass("");
+        $this->setDtcadastro(new DateTime());
+        
+    }
+
+    //-------------------------------- Update User on database --------------------------------------
+
+    public function update($login, $password){
+
+        $this->setDeslogin($login);
+        $this->setDespass($password);
+
+        $sql = new Sql();
+
+        $sql->query("UPDATE tb_users SET deslogin = :login, despass = :password WHERE iduser = :id", array(
+            ':login' => $this->getDeslogin(),
+            ':password' => $this->getDespass(),
+            ':id' => $this->getIduser()
+        ));
+
+    }
+
+    //-------------------------------- Insert User on database --------------------------------------
+
+    public function insert(){
+
+        $sql = new Sql();
+
+        $stmt= $sql->query("INSERT INTO tb_users (deslogin, despass) VALUES (:login, :password)", array(
+            ":login" => $this->getDeslogin(),
+            ":password" => $this->getDespass()
+        ));
+        
     }
 
     //-------------------------------- Echo User On View --------------------------------------

@@ -11,7 +11,7 @@ class Sql {
 
         try {
 
-            $this->conn = new PDO("mysql:dbname=dbdao;host=localhost", "root", "");
+            $this->conn = new PDO("mysql:dbname=;host=localhost", "root", "");
 
         } catch (PDOException $e) {
 
@@ -58,7 +58,8 @@ class Sql {
 
     //--------------------- Select from database -----------------------
     
-    public function select($rawQuery, $params = array()){
+    public function select($rawQuery, $params = array()):array
+    {
 
         $stmt = $this->query($rawQuery, $params);
 
